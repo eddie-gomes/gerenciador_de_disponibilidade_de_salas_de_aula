@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,4 +84,61 @@ public class Predio
 
         return "Lista salva";
     }
+    
+    public String Salvar()
+    {
+        try 
+        {
+            FileWriter fw = new FileWriter("diretorio//inst//"+this.instituicao.getNome()+"//"+this.nome+"//"+this.nome+".txt");
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(this.instituicao.getNome());
+            pw.println(this.nome);
+            pw.println(this.qtd_salas);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(Predio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Alteração feita";
+    }
+    
+    public Predio cadPred(Instituicao Inst)
+    {
+        int n;
+        Scanner cn = new Scanner(System.in);
+        ArrayList<Sala> SalaPred = new ArrayList();//arrayList temporário para salas
+        this.setInstituicao(Inst);
+        System.out.printf("informe o nome do prédio ");
+        this.setNome(cn.nextLine());
+        System.out.printf("informe o numero de salas ");
+        n = cn.nextInt();
+        this.setQtd_salas(n);
+        this.criaDiretPredio();
+        this.Salvar();
+        this.salvarLis();
+        for(int i=0; i<n; i++)
+        {
+            String select;
+            System.out.println("deseja adicionar sala ou labarotório? ");
+            select = cn.next();//seleciona o tipo de sala
+            if(select.equals("sala"))
+            {
+                Sala S = new Sala();
+                
+                SalaPred.add(S.cadSala(this));
+            }
+            else
+            {
+                Laboratorio L = new Laboratorio();
+                SalaPred.add(L.cadLab(this));
+            }
+        }
+        this.setSala(SalaPred);
+        
+        return this;
+    }
+            
 }
