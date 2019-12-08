@@ -13,7 +13,7 @@ public class Disciplina
 {
     private String nome;
     private long codigo;
-    private ArrayList <Turma> turmas = new ArrayList<Turma>();
+   private ArrayList <Turma> turmas = new ArrayList<Turma>();
     private String grau;
     
     public ArrayList<Turma> getTurmas() 
@@ -54,7 +54,7 @@ public class Disciplina
     	return this.grau;
     }
     public void escolherGrau(String gr) {
-    	System.out.println("Defina o Grau acadêmico da disciplina");
+    	System.out.println("Defina o Grau acadêmico da Disciplina");
     	  	if(gr.equalsIgnoreCase("graduação")|| gr.equalsIgnoreCase("graduacao")) {
     		setGrau("Graduação.");
     		
@@ -67,7 +67,7 @@ public class Disciplina
     	  	if (gr.equalsIgnoreCase("Lato Sensu")) {
     	  		setGrau("Lato Sensu.");
     }
-    	  	if(gr.equalsIgnoreCase("Stricto Sensu")) {
+    	  	if(gr.equalsIgnoreCase("stricto sensu")) {
         		setGrau("Stricto Sensu.");
         		
         	}
@@ -75,7 +75,7 @@ public class Disciplina
     	  	else {
     	  		System.out.println("Erro! Digite um Grau válido!");
     	  	}
-    	  	System.out.println("O Grau da disciplina é " + getGrau());
+    	  	System.out.println("O Grau da disciplina é " + this.grau );
     	      
     }
     
@@ -105,5 +105,26 @@ public class Disciplina
         }
 
         return "Lista salva";
+    }
+    
+    public String Salvar()
+    {
+        try 
+        {
+            FileWriter fw = new FileWriter("diretorio//disc"+this.nome+"//"+this.nome+".txt",true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println(this.nome);
+            pw.println(this.codigo);
+            pw.println(this.grau);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(Disciplina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "Alteração feita";
     }
 }
