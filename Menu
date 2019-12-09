@@ -1,0 +1,199 @@
+package entities;
+
+import java.util.ArrayList;
+
+public class Menu {
+    
+        public boolean confereInst(String KInst, ArrayList <Instituicao> Inst)//Verifica se a instituição existe
+        {
+            for (int i = 0; i < Inst.size(); i++){
+                if (KInst.equals(Inst.get(i).getNome())){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void imprimeInst(ArrayList <Instituicao> Inst)//Imprime todas as instituições
+        {
+            System.out.println("Instiuicoes cadastradas: ");
+            for (int i = 0; i < Inst.size(); i++){
+                System.out.println("[" + (i+1) + "] - " + Inst.get(i).getNome());
+            }
+        }
+
+        public int indiceInst(String KInst, ArrayList <Instituicao> Inst)//Verifica o indice da instituicao
+        {
+            for (int i = 0; i < Inst.size(); i++){
+                if (KInst.equals(Inst.get(i).getNome())){
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        public void imprimePredio(String KInst, int indice, ArrayList <Instituicao> Inst)
+        {
+            System.out.println("Predios cadastrados em " + KInst);
+            for (int i = 0; i < Inst.get(indice).getPredios().size(); i++)
+            {
+                System.out.println("[" + (i+1) + "] - " + Inst.get(indice).getPredios().get(i).getNome());
+            }
+        }
+
+        public boolean conferePredio(String KPredio, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getPredios().size(); i++){
+                if (KPredio.equals(Inst.get(indice).getPredios().get(i).getNome()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int indicePredio(String KPredio, int indiceInst, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indiceInst).getPredios().size(); i++){
+                if (KPredio.equals(Inst.get(indiceInst).getPredios().get(i).getNome())){
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void imprimeSala(String KInst, String KPredio, int indiceInst, int indicePredio, ArrayList <Instituicao> Inst)
+        {
+            System.out.println("Instituicao: " + KInst + "\nPredio: " + KPredio);
+            System.out.println("Salas no predio: ");
+            for (int i = 0; i < Inst.get(indiceInst).getPredios().get(indicePredio).getSala().size(); i++)
+            {
+                System.out.println("[" + (i+1) + "] - " + Inst.get(indiceInst).getPredios().get(indicePredio).getSala().get(i).getIdSala());
+            }
+        }
+        
+        public boolean confereSala(String KSala, int indiceInst, int indicePredio, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indiceInst).getPredios().get(indicePredio).getSala().size(); i++)
+            {
+                if (KSala.equals(Inst.get(indiceInst).getPredios().get(indicePredio).getSala().get(i).getIdSala()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public int indiceSala(String KSala, int indiceInst, int indicePredio, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indiceInst).getPredios().get(indicePredio).getSala().size(); i++)
+            {
+                if (KSala.equals(Inst.get(indiceInst).getPredios().get(indicePredio).getSala().get(i).getIdSala()))
+                {
+                    return i;
+                }
+            }    
+            return -1;
+        }
+        
+        public void imprimirProfessor(String KInst, int indice, ArrayList <Instituicao> Inst)
+        {
+            System.out.println("Lista de professores da " + KInst);
+            for (int i = 0; i < Inst.get(indice).getProfessores().size(); i++)
+            {
+                System.out.println("Nome: " + Inst.get(indice).getProfessores().get(i).getNome() + " - Matricula: " + Inst.get(indice).getProfessores().get(i).getMatricula());
+            }
+        }
+        
+        public boolean consultarProfessor(String KMatricula, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getProfessores().size(); i++)
+            {
+                if (KMatricula.equals(Inst.get(indice).getProfessores().get(i).getMatricula()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public int indiceProfessor(String KMatricula, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getProfessores().size(); i++)
+            {
+                if (KMatricula.equals(Inst.get(indice).getProfessores().get(i).getMatricula()))
+                {
+                    return i;
+                }
+            }
+            return -1;            
+        }
+        
+        public void imprimirAluno(String KInst, int indice, ArrayList <Instituicao> Inst)
+        {
+            System.out.println("Lista de alunos da " + KInst);
+            for (int i = 0; i < Inst.get(indice).getAlunos().size(); i++)
+            {
+                System.out.println("Nome: " + Inst.get(indice).getAlunos().get(i).getNome() + "\nMatricula: " + Inst.get(indice).getAlunos().get(i).getNome() + "\nNivel: " + Inst.get(indice).getAlunos().get(i).getMatricula() + "\n");
+            }
+        }
+        
+        public boolean consultarAluno(String KMatricula, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getAlunos().size(); i++)
+            {
+                if (KMatricula.equals(Inst.get(indice).getAlunos().get(i).getMatricula()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public int indiceAluno(String KMatricula, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getAlunos().size(); i++)
+            {
+                if (KMatricula.equals(Inst.get(indice).getAlunos().get(i).getMatricula()))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void imprimeDisciplina(String KInst, String KId, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getDisciplina().size(); i++)
+            {
+                System.out.println("Disciplinas registradas em " + KInst);
+                System.out.println("Disciplina :" + Inst.get(indice).getDisciplina().get(i).getNome() + " - Codigo: " + Inst.get(indice).getDisciplina().get(i).getCodigo());
+            }
+        }
+        
+        public boolean consusultarDisciplina(String KCodigo, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getDisciplina().size(); i++)  
+            {
+                if(KCodigo.equals(Inst.get(indice).getDisciplina().get(i).getCodigo()))
+                        {
+                            return true;
+                        }
+            }
+            return false;
+        }
+        
+        public int indiceDisciplina(String KCodigo, int indice, ArrayList <Instituicao> Inst)
+        {
+            for (int i = 0; i < Inst.get(indice).getDisciplina().size(); i++)  
+            {
+                if(KCodigo.equals(Inst.get(indice).getDisciplina().get(i).getCodigo()))
+                        {
+                            return i;
+                        }
+            }
+            return -1;
+        }   
+
+    
+}
